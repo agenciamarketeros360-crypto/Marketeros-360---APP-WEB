@@ -109,7 +109,6 @@ function initClientPage() {
         }
     });
     
-    // Aquí puedes agregar la lógica para los botones .btn-edit de la tabla de clientes
 }
 
 /**
@@ -642,7 +641,7 @@ function initReportesPage() {
                 alertMsg += `\nSin filtro de fecha.`;
             }
             alert(alertMsg);
-            // Aquí iría la lógica de generación de Excel
+            // Acá iría la lógica de generación de Excel
         });
     });
 }
