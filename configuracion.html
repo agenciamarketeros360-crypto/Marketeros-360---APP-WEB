@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - Be Clean Services</title>
+    
+    <!-- Links de Google Font y FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Tu CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="img/logo_principal.png" alt="Be Clean Services Logo" class="logo">
+            </div>
+            <nav>
+                <ul>
+                    <!-- Enlaces con iconos. Marca 'active' el de esta página -->
+                    <li><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+                    <li><a href="clientes.html"><i class="fa-solid fa-users"></i> Clientes</a></li>
+                    <li><a href="servicios.html"><i class="fa-solid fa-shirt"></i> Servicios/Órdenes</a></li>
+                    <li><a href="facturacion.html"><i class="fa-solid fa-file-invoice-dollar"></i> Facturación</a></li>
+                    <li><a href="compras.html"><i class="fa-solid fa-cart-shopping"></i> Compras</a></li>
+                    <li><a href="stock.html"><i class="fa-solid fa-box-archive"></i> Stock (Insumos)</a></li>
+                    <li><a href="fondos.html"><i class="fa-solid fa-landmark"></i> Fondos</a></li>
+                    <li><a href="reportes.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+                    <li><a href="configuracion.html" class="active"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span>Admin</span>
+                <a href="login.html" class="logout-button">Cerrar Sesión</a> <!-- Corregido a login.html -->
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Configuración del Sistema</h1>
+            </header>
+            
+            <section class="content">
+                
+                <!-- SECCIÓN 1: GESTIÓN DE ARTÍCULOS Y PRECIOS -->
+                <div class="config-section">
+                    <h2 class="form-section-title">Gestión de Artículos y Precios</h2>
+                    <p class="section-description">
+                        Aquí defines los servicios y prendas que ofreces, sus precios y los iconos que se mostrarán en el formulario de "Nueva Orden".
+                    </p>
+
+                    <div class="action-bar">
+                        <button class="btn btn-accent" id="import-prices-btn">
+                            <i class="fa-solid fa-file-excel"></i> Importar Precios
+                        </button>
+                        <button class="btn btn-primary" id="new-article-btn">
+                            <i class="fa-solid fa-plus"></i> Nuevo Artículo
+                        </button>
+                    </div>
+
+                    <div class="article-list table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Artículo</th>
+                                    <th>Tipo de Servicio</th>
+                                    <th>Precio</th>
+                                    <th>Icono (Vista Previa)</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Fila de ejemplo 1 -->
+                                <tr>
+                                    <td>1</td>
+                                    <td>Camisa</td>
+                                    <td>Lavado en Seco</td>
+                                    <td>Q 15.00</td>
+                                    <td class="icon-preview"><i class="fa-solid fa-shirt"></i></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-icon btn-edit" title="Editar"><i class="fa-solid fa-pencil"></i></button>
+                                        <button class="btn-icon btn-delete" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <!-- Fila de ejemplo 2 -->
+                                <tr>
+                                    <td>2</td>
+                                    <td>Pantalón</td>
+                                    <td>Lavado en Seco</td>
+                                    <td>Q 18.00</td>
+                                    <td class="icon-preview"><i class="fa-solid fa-person-dress"></i></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-icon btn-edit" title="Editar"><i class="fa-solid fa-pencil"></i></button>
+                                        <button class="btn-icon btn-delete" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <!-- Fila de ejemplo 3 -->
+                                <tr>
+                                    <td>3</td>
+                                    <td>Lavado por Libra</td>
+                                    <td>Lavado por Libra</td>
+                                    <td>Q 2.50</td>
+                                    <td class="icon-preview"><i class="fa-solid fa-basket-shopping"></i></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-icon btn-edit" title="Editar"><i class="fa-solid fa-pencil"></i></button>
+                                        <button class="btn-icon btn-delete" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- SECCIÓN 2: EMPRESA Y SEGURIDAD (NUEVO BLOQUE) -->
+                <!-- ============================================== -->
+                <div class="config-section config-section-margin">
+                    <h2 class="form-section-title">Empresa y Seguridad</h2>
+
+                    <div class="form-grid">
+                        
+                        <!-- Columna 1: Datos de la Empresa -->
+                        <div class="form-column">
+                            <h3>Datos de la Empresa</h3>
+                            <p class="section-description-small">
+                                Esta información aparecerá en tus comprobantes y recibos.
+                            </p>
+                            <form id="company-form">
+                                <div class="form-group">
+                                    <label for="company-name">Nombre de la Lavandería</label>
+                                    <input type="text" id="company-name" name="company_name" placeholder="Be Clean Services">
+                                </div>
+                                <div class="form-group">
+                                    <label for="company-doc">Documento (NIT / CUIT)</label>
+                                    <input type="text" id="company-doc" name="company_doc" placeholder="1234567-8">
+                                </div>
+                                <div class="form-group">
+                                    <label for="company-phone">Teléfono</label>
+                                    <input type="tel" id="company-phone" name="company_phone" placeholder="+502 1234-5678">
+                                </div>
+                                <div class="form-group">
+                                    <label for="company-address">Dirección</label>
+                                    <input type="text" id="company-address" name="company_address" placeholder="123 Calle Falsa, Zona 10">
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="save-company-btn">
+                                    <i class="fa-solid fa-save"></i> Guardar Datos
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Columna 2: Cambiar Contraseña -->
+                        <div class="form-column">
+                            <h3>Cambiar Contraseña</h3>
+                            <p class="section-description-small">
+                                Cambia la contraseña de tu cuenta de administrador.
+                            </p>
+                            <form id="password-form">
+                                <div class="form-group">
+                                    <label for="pass-current">Contraseña Actual</label>
+                                    <input type="password" id="pass-current" name="pass_current" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pass-new">Nueva Contraseña</label>
+                                    <input type="password" id="pass-new" name="pass_new" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pass-confirm">Confirmar Nueva Contraseña</label>
+                                    <input type="password" id="pass-confirm" name="pass_confirm" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="save-password-btn">
+                                    <i class="fa-solid fa-lock"></i> Cambiar Contraseña
+                                </button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- ============================================== -->
+                <!-- FIN NUEVO BLOQUE -->
+                <!-- ============================================== -->
+                
+            </section>
+            
+            <footer class="app-footer">
+                <p>&copy; <span id="current-year"></span> Marketeros 360 | Be Clean Services v1.0</p>
+            </footer>
+        </main> 
+    </div> 
+
+    <!-- ****** INICIO DEL MODAL "NUEVO ARTÍCULO" ****** -->
+    <div id="article-modal" class="modal-overlay">
+        <div class="modal-content modal-sm"> 
+            <header class="modal-header">
+                <h2 id="article-modal-title">Nuevo Artículo/Servicio</h2>
+                <button class="modal-close" id="article-modal-close-btn">&times;</button>
+            </header>
+
+            <div class="modal-body">
+                <form id="article-form">
+                    <div class="form-group">
+                        <label for="article-name">Nombre del Artículo *</label>
+                        <input type="text" id="article-name" name="nombre" placeholder="Ej: Camisa" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="article-service-type">Tipo de Servicio *</label>
+                        <select id="article-service-type" name="tipo_servicio" required>
+                            <option value="">Seleccione un tipo...</option>
+                            <option value="seco">Lavado en Seco</option>
+                            <option value="libra">Lavado por Libra</option>
+                            <option value="planchado">Solo Planchado</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="article-price">Precio (Q) *</label>
+                        <input type="number" id="article-price" name="precio" placeholder="0.00" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="article-icon">Clase de Icono (FontAwesome)</label>
+                        <input type="text" id="article-icon" name="icon_class" placeholder="Ej: fa-solid fa-shirt">
+                        <small class="form-hint">Busque el ícono en FontAwesome y pegue la clase aquí.</small>
+                    </div>
+                </form>
+            </div>
+
+            <footer class="modal-footer">
+                <button class="btn btn-secondary" id="article-modal-cancel-btn">Cancelar</button>
+                <button class="btn btn-primary" id="article-modal-save-btn">Guardar Artículo</button>
+            </footer>
+
+        </div>
+    </div>
+    <!-- ****** FIN DEL MODAL "NUEVO ARTÍCULO" ****** -->
+
+    <script src="js/main.js"></script>
+</body>
+</html>

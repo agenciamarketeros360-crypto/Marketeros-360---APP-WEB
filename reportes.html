@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - Be Clean Services</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="img/logo_principal.png" alt="Be Clean Services Logo" class="logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+                    <li><a href="clientes.html"><i class="fa-solid fa-users"></i> Clientes</a></li>
+                    <li><a href="servicios.html"><i class="fa-solid fa-shirt"></i> Servicios/Órdenes</a></li>
+                    <li><a href="facturacion.html"><i class="fa-solid fa-file-invoice-dollar"></i> Facturación</a></li>
+                    <li><a href="compras.html"><i class="fa-solid fa-cart-shopping"></i> Compras</a></li>
+                    <li><a href="stock.html"><i class="fa-solid fa-box-archive"></i> Stock (Insumos)</a></li>
+                    <li><a href="fondos.html"><i class="fa-solid fa-landmark"></i> Fondos</a></li>
+                    <li><a href="reportes.html" class="active"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+                    <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span>Admin</span>
+                <a href="login.html" class="logout-button">Cerrar Sesión</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Centro de Reportes</h1>
+            </header>
+            
+            <section class="content">
+                
+                <div class="report-filters card-shadow">
+                    <h3 class="form-section-title">Filtros Globales</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="report-date-start">Fecha de Inicio</label>
+                            <input type="date" id="report-date-start" name="fecha_inicio">
+                        </div>
+                        <div class="form-group">
+                            <label for="report-date-end">Fecha de Fin</label>
+                            <input type="date" id="report-date-end" name="fecha_fin">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-list">
+
+                    <div class="report-card card-shadow">
+                        <div class="report-icon report-icon-ventas"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                        <div class="report-info">
+                            <h3>Reporte de Ventas</h3>
+                            <p>Resumen de todos los comprobantes de venta (facturas internas) generados en el período.</p>
+                        </div>
+                        <button class="btn btn-primary btn-generate-report" data-report-type="ventas">
+                            <i class="fa-solid fa-download"></i> Generar
+                        </button>
+                    </div>
+
+                    <div class="report-card card-shadow">
+                        <div class="report-icon report-icon-cobros"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                        <div class="report-info">
+                            <h3>Reporte de Cobros</h3>
+                            <p>Detalle de todo el dinero recibido (ingresos) por cada medio de pago (Efectivo, Banco, QR, etc.).</p>
+                        </div>
+                        <button class="btn btn-primary btn-generate-report" data-report-type="cobros">
+                            <i class="fa-solid fa-download"></i> Generar
+                        </button>
+                    </div>
+
+                    <div class="report-card card-shadow">
+                        <div class="report-icon report-icon-compras"><i class="fa-solid fa-cart-shopping"></i></div>
+                        <div class="report-info">
+                            <h3>Reporte de Compras y Gastos</h3>
+                            <p>Resumen de todas las facturas de proveedores y gastos manuales registrados (egresos).</p>
+                        </div>
+                        <button class="btn btn-primary btn-generate-report" data-report-type="compras">
+                            <i class="fa-solid fa-download"></i> Generar
+                        </button>
+                    </div>
+
+                    <div class="report-card card-shadow">
+                        <div class="report-icon report-icon-stock"><i class="fa-solid fa-box-archive"></i></div>
+                        <div class="report-info">
+                            <h3>Reporte de Stock (Insumos)</h3>
+                            <p>Inventario actual de todos los insumos, cantidades, costo total y alertas de stock bajo.</p>
+                        </div>
+                        <button class="btn btn-primary btn-generate-report" data-report-type="stock">
+                            <i class="fa-solid fa-download"></i> Generar
+                        </button>
+                    </div>
+
+                    <div class="report-card card-shadow">
+                        <div class="report-icon report-icon-clientes"><i class="fa-solid fa-users"></i></div>
+                        <div class="report-info">
+                            <h3>Reporte de Clientes</h3>
+                            <p>Lista de clientes con mayor facturación (Top Clientes) o clientes inactivos.</p>
+                        </div>
+                        <button class="btn btn-primary btn-generate-report" data-report-type="clientes">
+                            <i class="fa-solid fa-download"></i> Generar
+                        </button>
+                    </div>
+
+                </div>
+                
+            </section>
+            
+            <footer class="app-footer">
+                <p>&copy; <span id="current-year"></span> Marketeros 360 | Be Clean Services v1.0</p>
+            </footer>
+        </main> 
+    </div> 
+
+    <script src="js/main.js"></script>
+</body>
+</html>
