@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios y Órdenes - Be Clean Services</title>
+    
+    <!-- Links de Google Font y FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Tu CSS Unificado -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="img/logo_principal.png" alt="Be Clean Services Logo" class="logo">
+            </div>
+            <nav>
+                <ul>
+                    <!-- Enlaces con iconos. Marca 'active' el de esta página -->
+                    <li><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+                    <li><a href="clientes.html"><i class="fa-solid fa-users"></i> Clientes</a></li>
+                    <li><a href="servicios.html" class="active"><i class="fa-solid fa-shirt"></i> Servicios/Órdenes</a></li>
+                    <li><a href="facturacion.html"><i class="fa-solid fa-file-invoice-dollar"></i> Facturación</a></li>
+                    <li><a href="compras.html"><i class="fa-solid fa-cart-shopping"></i> Compras</a></li>
+                    <li><a href="stock.html"><i class="fa-solid fa-box-archive"></i> Stock (Insumos)</a></li>
+                    <li><a href="fondos.html"><i class="fa-solid fa-landmark"></i> Fondos</a></li>
+                    <li><a href="reportes.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+                    <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span>admin</span>
+                <!-- CORRECCIÓN: Apunta a login.html -->
+                <a href="login.html" class="logout-button">Cerrar Sesión</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Gestión de Servicios y Órdenes</h1>
+            </header>
+            
+            <section class="content">
+                
+                <div class="action-bar">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Buscar por N° Orden, cliente o N° etiqueta...">
+                        <button class="btn-icon btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                    <button class="btn btn-primary" id="new-order-btn">
+                        <i class="fa-solid fa-plus"></i> Nueva Orden
+                    </button>
+                </div>
+
+                <div class="order-list table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>N° Orden</th>
+                                <th>Cliente</th>
+                                <th>Fecha Entrega</th>
+                                <th>Estado</th>
+                                <th>Total</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Fila de ejemplo 1 (En Proceso) -->
+                            <tr>
+                                <td>#1002</td>
+                                <td>Juan Pérez</td>
+                                <td>02/11/2025</td>
+                                <td><span class="status status-proceso">En Proceso</span></td>
+                                <td>Q 150.00</td>
+                                <td class="action-buttons">
+                                    <button class="btn-icon btn-view" title="Ver Detalles"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon btn-edit" title="Actualizar Estado"><i class="fa-solid fa-pencil"></i></button>
+                                    <button class="btn-icon btn-invoice" title="Facturar" disabled><i class="fa-solid fa-file-invoice-dollar"></i></button>
+                                </td>
+                            </tr>
+                            <!-- Fila de ejemplo 2 (Lista para Entrega) -->
+                            <tr>
+                                <td>#1001</td>
+                                <td>Hotel Guatemala Plaza</td>
+                                <td>31/10/2025</td>
+                                <td><span class="status status-lista">Lista p/ Entrega</span></td>
+                                <td>Q 2,500.00</td>
+                                <td class="action-buttons">
+                                    <button class="btn-icon btn-view" title="Ver Detalles"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon btn-edit" title="Actualizar Estado"><i class="fa-solid fa-pencil"></i></button>
+                                    <button class="btn-icon btn-invoice" title="Facturar"><i class="fa-solid fa-file-invoice-dollar"></i></button>
+                                </td>
+                            </tr>
+                            <!-- Fila de ejemplo 3 (Entregada y Facturada) -->
+                            <tr>
+                                <td>#1000</td>
+                                <td>Maria Rojas</td>
+                                <td>30/10/2025</td>
+                                <td><span class="status status-entregada">Entregada</span></td>
+                                <td>Q 85.00</td>
+                                <td class="action-buttons">
+                                    <button class="btn-icon btn-view" title="Ver Detalles"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon btn-edit" title="Actualizar Estado" disabled><i class="fa-solid fa-pencil"></i></button>
+                                    <button class="btn-icon btn-invoice" title="Facturada" disabled><i class="fa-solid fa-file-invoice-dollar"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </section> <!-- <-- CORRECCIÓN: La sección de contenido termina aquí -->
+            
+            <footer class="app-footer">
+                <p>&copy; <span id="current-year"></span> Marketeros 360 | Be Clean Services v1.0</p>
+            </footer>
+        </main> 
+    </div> <!-- Fin de .app-container -->
+
+    <!-- =================================================== -->
+    <!-- CORRECCIÓN: Modal movido DENTRO del body -->
+    <!-- =================================================== -->
+    <div id="order-modal" class="modal-overlay">
+        <div class="modal-content modal-lg">
+            <header class="modal-header">
+                <h2 id="order-modal-title">Nueva Orden de Servicio</h2>
+                <button class="modal-close" id="order-modal-close-btn">&times;</button>
+            </header>
+            <div class="modal-body">
+                <form id="order-form">
+                    
+                    <h3 class="form-section-title">1. Datos Generales de la Orden</h3>
+                    <div class="form-grid">
+                        <div class="form-group form-span-col-2">
+                            <label for="order-client">Cliente *</label>
+                            <select id="order-client" name="cliente" required>
+                                <option value="">Seleccione un cliente...</option>
+                                <option value="1">Juan Pérez</option>
+                                <option value="2">Hotel Guatemala Plaza</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="order-service-type">Tipo de Servicio *</label>
+                            <select id="order-service-type" name="tipo_servicio" required>
+                                <option value="seco">Lavado en Seco</option>
+                                <option value="libra">Lavado por Libra</option>
+                                <option value="planchado">Solo Planchado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="order-weight">Peso (Libras)</label>
+                            <input type="number" id="order-weight" name="peso" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="order-frequency">Frecuencia</label>
+                            <select id="order-frequency" name="frecuencia">
+                                <option value="unico">Único</option>
+                                <option value="semanal">Semanal</option>
+                                <option value="mensual">Mensual</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="order-logistics">Logística</label>
+                            <select id="order-logistics" name="logistica">
+                                <option value="retira">Cliente Retira</option>
+                                <option value="entrega">Entrega a Domicilio</option>
+                            </select>
+                        </div>
+                        <div class="form-group form-span-col-2">
+                            <label for="order-preferred-time">Día/Horario Preferido</label>
+                            <input type="text" id="order-preferred-time" name="horario_preferido" placeholder="Ej: Lunes por la mañana">
+                        </div>
+                        <div class="form-group form-span-col-2">
+                            <label for="order-notes">Detalles/Observaciones del Servicio</label>
+                            <textarea id="order-notes" name="observaciones_servicio" rows="2" placeholder="Nota general para toda la orden..."></textarea>
+                        </div>
+                    </div>
+
+                    <hr class="divider">
+
+                    <h3 class="form-section-title">2. Detalle de Prendas</h3>
+                    <div class="service-details-grid">
+                        <div class="item-selector-wrapper">
+                            <label>Haga clic para agregar prendas:</label>
+                            <div class="item-selector">
+                                <!-- JavaScript llenará esta área dinámicamente -->
+                            </div>
+                        </div>
+
+                        <div class="order-summary-wrapper">
+                            <label>Prendas agregadas a la orden:</label>
+                            <div class="order-summary">
+                                <ul id="order-item-list">
+                                    <!-- Las prendas se agregarán aquí con JS -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <footer class="modal-footer">
+                <span class="order-total">Total: <strong id="order-total-price">Q 0.00</strong></span>
+                <button class="btn btn-secondary" id="order-modal-cancel-btn">Cancelar</button>
+                <button class="btn btn-primary" id="order-modal-save-btn">Guardar Orden</button>
+            </footer>
+        </div>
+    </div> 
+    <!-- ****** FIN DEL MODAL "NUEVA ORDEN" ****** -->
+
+    <!-- =================================================== -->
+    <!-- CORRECCIÓN: Script movido al final, antes de </body> -->
+    <!-- =================================================== -->
+    <script src="js/main.js"></script>
+
+</body>
+</html>

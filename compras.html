@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compras - Be Clean Services</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="img/logo_principal.png" alt="Be Clean Services Logo" class="logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+                    <li><a href="clientes.html"><i class="fa-solid fa-users"></i> Clientes</a></li>
+                    <li><a href="servicios.html"><i class="fa-solid fa-shirt"></i> Servicios/Órdenes</a></li>
+                    <li><a href="facturacion.html"><i class="fa-solid fa-file-invoice-dollar"></i> Facturación</a></li>
+                    <li><a href="compras.html" class="active"><i class="fa-solid fa-cart-shopping"></i> Compras</a></li>
+                    <li><a href="stock.html"><i class="fa-solid fa-box-archive"></i> Stock (Insumos)</a></li>
+                    <li><a href="fondos.html"><i class="fa-solid fa-landmark"></i> Fondos</a></li>
+                    <li><a href="reportes.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+                    <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span>Admin</span>
+                <a href="login.html" class="logout-button">Cerrar Sesión</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Gestión de Compras y Gastos</h1>
+            </header>
+            
+            <section class="content">
+                
+                <div class="action-bar">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Buscar por N° Factura, proveedor...">
+                        <button class="btn-icon btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                    <button class="btn btn-primary" id="new-purchase-btn">
+                        <i class="fa-solid fa-plus"></i> Nueva Compra / Gasto
+                    </button>
+                </div>
+
+                <div class="purchase-list table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Proveedor</th>
+                                <th>N° Factura</th>
+                                <th>Total</th>
+                                <th>Estado de Pago</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01/11/2025</td>
+                                <td>Insumos S.A.</td>
+                                <td>FAC-0089</td>
+                                <td>Q 800.00</td>
+                                <td><span class="status status-pagada">Pagada</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn-icon btn-view" title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>03/11/2025</td>
+                                <td>PerchasGT</td>
+                                <td>FAC-0102</td>
+                                <td>Q 450.00</td>
+                                <td><span class="status status-pendiente">Pendiente</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn-icon btn-view" title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon btn-payment" title="Registrar Pago"><i class="fa-solid fa-hand-holding-dollar"></i></button>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+            </section>
+            
+            <footer class="app-footer">
+                <p>&copy; <span id="current-year"></span> Marketeros 360 | Be Clean Services v1.0</p>
+            </footer>
+        </main> 
+    </div> 
+
+    <div id="purchase-modal" class="modal-overlay">
+        <div class="modal-content modal-lg"> <header class="modal-header">
+                <h2 id="purchase-modal-title">Registrar Nueva Compra / Gasto</h2>
+                <button class="modal-close" id="purchase-modal-close-btn">&times;</button>
+            </header>
+
+            <div class="modal-body">
+                <form id="purchase-form">
+                    
+                    <h3 class="form-section-title">Datos del Comprobante</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="purchase-provider">Proveedor</label>
+                            <input type="text" id="purchase-provider" name="proveedor" placeholder="Ej: Insumos S.A.">
+                        </div>
+                        <div class="form-group">
+                            <label for="purchase-invoice-id">N° Factura / Comprobante</label>
+                            <input type="text" id="purchase-invoice-id" name="nro_factura">
+                        </div>
+                        <div class="form-group">
+                            <label for="purchase-date">Fecha de Compra</label>
+                            <input type="date" id="purchase-date" name="fecha_compra">
+                        </div>
+                        <div class="form-group">
+                            <label for="purchase-total">Total Factura (Q) *</label>
+                            <input type="number" id="purchase-total" name="total" placeholder="0.00" step="0.01" min="0" required>
+                        </div>
+                    </div>
+
+                    <hr class="divider">
+
+                    <h3 class="form-section-title">Detalle de Insumos (Opcional - si actualiza stock)</h3>
+                    <div class="purchase-items">
+                        <div class="form-group-inline">
+                            <select id="purchase-item-select">
+                                <option value="">Seleccione un insumo de su stock...</option>
+                                <option value="J-001">Jabón Líquido Neutro</option>
+                                <option value="P-001">Perchas de Alambre</option>
+                                <option value="B-001">Bolsas Plásticas (Rollo)</option>
+                            </select>
+                            <input type="number" id="purchase-item-qty" placeholder="Cant." min="1">
+                            <button type="button" class="btn btn-accent" id="purchase-add-item-btn"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <ul id="purchase-item-list">
+                            </ul>
+                    </div>
+
+                    <hr class="divider">
+
+                    <h3 class="form-section-title">Datos del Pago</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="purchase-payment-method">Medio de Pago *</label>
+                            <select id="purchase-payment-method" name="medio_pago" required>
+                                <option value="banco">Banco (Transferencia, etc.)</option>
+                                <option value="caja">Caja (Efectivo)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="purchase-payment-status">Estado del Pago *</label>
+                            <select id="purchase-payment-status" name="estado_pago" required>
+                                <option value="pagada">Ya la pagué</option>
+                                <option value="pendiente">Pendiente de Pago</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <footer class="modal-footer">
+                <button class="btn btn-secondary" id="purchase-modal-cancel-btn">Cancelar</button>
+                <button class="btn btn-primary" id="purchase-modal-save-btn">Guardar Compra</button>
+            </footer>
+
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>

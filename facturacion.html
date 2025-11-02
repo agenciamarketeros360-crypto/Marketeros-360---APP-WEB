@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturación y Cobros - Be Clean Services</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="img/logo_principal.png" alt="Be Clean Services Logo" class="logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+                    <li><a href="clientes.html"><i class="fa-solid fa-users"></i> Clientes</a></li>
+                    <li><a href="servicios.html"><i class="fa-solid fa-shirt"></i> Servicios/Órdenes</a></li>
+                    <li><a href="facturacion.html" class="active"><i class="fa-solid fa-file-invoice-dollar"></i> Facturación</a></li>
+                    <li><a href="compras.html"><i class="fa-solid fa-cart-shopping"></i> Compras</a></li>
+                    <li><a href="stock.html"><i class="fa-solid fa-box-archive"></i> Stock (Insumos)</a></li>
+                    <li><a href="fondos.html"><i class="fa-solid fa-landmark"></i> Fondos</a></li>
+                    <li><a href="reportes.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+                    <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span>Admin</span>
+                <a href="login.html" class="logout-button">Cerrar Sesión</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Facturación y Cobros (Ventas)</h1>
+            </header>
+            
+            <section class="content">
+                
+                <div class="action-bar">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Buscar por N° de Comprobante, cliente...">
+                        <button class="btn-icon btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                    <button class="btn btn-primary" id="new-invoice-btn">
+                        <i class="fa-solid fa-plus"></i> Nuevo Comprobante
+                    </button>
+                </div>
+
+                <div class="invoice-list table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Comprobante N°</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Estado de Pago</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>F-0001</td>
+                                <td>Hotel Guatemala Plaza</td>
+                                <td>31/10/2025</td>
+                                <td data-total="2500.00">Q 2,500.00</td>
+                                <td><span class="status status-pendiente">Pendiente</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn-icon btn-payment" title="Registrar Cobro"><i class="fa-solid fa-hand-holding-dollar"></i></button>
+                                    <button class="btn-icon btn-print" title="Imprimir Recibo"><i class="fa-solid fa-print"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>F-0002</td>
+                                <td>Juan Pérez</td>
+                                <td>02/11/2025</td>
+                                <td data-total="150.00">Q 150.00</td>
+                                <td><span class="status status-cobrada">Cobrada</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn-icon btn-payment" title="Registrar Cobro" disabled><i class="fa-solid fa-hand-holding-dollar"></i></button>
+                                    <button class="btn-icon btn-print" title="Imprimir Recibo"><i class="fa-solid fa-print"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>F-0003</td>
+                                <td>Maria Rojas</td>
+                                <td>30/10/2025</td>
+                                <td data-total="85.00">Q 85.00</td>
+                                <td><span class="status status-cobrada">Cobrada</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn-icon btn-payment" title="Registrar Cobro" disabled><i class="fa-solid fa-hand-holding-dollar"></i></button>
+                                    <button class="btn-icon btn-print" title="Imprimir Recibo"><i class="fa-solid fa-print"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </section>
+            
+            <footer class="app-footer">
+                <p>&copy; <span id="current-year"></span> Marketeros 360 | Be Clean Services v1.0</p>
+            </footer>
+        </main> 
+    </div> 
+
+    <div id="payment-modal" class="modal-overlay">
+        <div class="modal-content modal-sm"> <header class="modal-header">
+                <h2 id="payment-modal-title">Registrar Cobro</h2>
+                <button class="modal-close" id="payment-modal-close-btn">&times;</button>
+            </header>
+
+            <div class="modal-body">
+                <form id="payment-form">
+                    <p class="payment-info">Registrando cobro para el Comprobante <strong id="payment-invoice-id">#F-0001</strong></p>
+                    
+                    <div class="form-group">
+                        <label for="payment-amount">Importe a Cobrar (Q) *</label>
+                        <input type="number" id="payment-amount" name="importe" placeholder="0.00" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="payment-method">Medio de Cobro *</label>
+                        <select id="payment-method" name="medio_cobro" required>
+                            <option value="">Seleccione un medio...</option>
+                            <option value="efectivo">Efectivo</option>
+                            <option value="transferencia">Transferencia Bancaria</option>
+                            <option value="qr">Código QR</option>
+                            <option value="tarjeta_debito">Tarjeta de Débito</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="payment-detail">Detalle / Observaciones</label>
+                        <textarea id="payment-detail" name="detalle" rows="3" placeholder="Ej: N° de referencia..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <footer class="modal-footer">
+                <button class="btn btn-secondary" id="payment-modal-cancel-btn">Cancelar</button>
+                <button class="btn btn-primary" id="payment-modal-save-btn">Confirmar Cobro</button>
+            </footer>
+
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>

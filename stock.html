@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock (Insumos) - Be Clean Services</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="img/logo_principal.png" alt="Be Clean Services Logo" class="logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+                    <li><a href="clientes.html"><i class="fa-solid fa-users"></i> Clientes</a></li>
+                    <li><a href="servicios.html"><i class="fa-solid fa-shirt"></i> Servicios/Órdenes</a></li>
+                    <li><a href="facturacion.html"><i class="fa-solid fa-file-invoice-dollar"></i> Facturación</a></li>
+                    <li><a href="compras.html"><i class="fa-solid fa-cart-shopping"></i> Compras</a></li>
+                    <li><a href="stock.html" class="active"><i class="fa-solid fa-box-archive"></i> Stock (Insumos)</a></li>
+                    <li><a href="fondos.html"><i class="fa-solid fa-landmark"></i> Fondos</a></li>
+                    <li><a href="reportes.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+                    <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span>Admin</span>
+                <a href="login.html" class="logout-button">Cerrar Sesión</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Control de Stock (Insumos)</h1>
+            </header>
+            
+            <section class="content">
+                
+                <div class="action-bar">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Buscar insumo por nombre o código...">
+                        <button class="btn-icon btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                    <button class="btn btn-primary" id="new-stock-btn">
+                        <i class="fa-solid fa-plus"></i> Nuevo Insumo
+                    </button>
+                </div>
+
+                <div class="stock-list table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Artículo (Insumo)</th>
+                                <th>Grupo</th>
+                                <th>Unidad</th>
+                                <th>Cant. Actual</th>
+                                <th>Stock Mínimo</th>
+                                <th>Precio Costo (Q)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>J-001</td>
+                                <td>Jabón Líquido Neutro</td>
+                                <td>Químicos</td>
+                                <td>Galón</td>
+                                <td class="stock-qty">20</td>
+                                <td class="stock-min">5</td>
+                                <td>250.00</td>
+                                <td class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Editar"><i class="fa-solid fa-pencil"></i></button>
+                                    <button class="btn-icon btn-delete" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>P-001</td>
+                                <td>Perchas de Alambre</td>
+                                <td>Empaquetado</td>
+                                <td>Caja (100u)</td>
+                                <td class="stock-qty status-low-stock">2</td>
+                                <td class="stock-min">3</td>
+                                <td>150.00</td>
+                                <td class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Editar"><i class="fa-solid fa-pencil"></i></button>
+                                    <button class="btn-icon btn-delete" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>B-001</td>
+                                <td>Bolsas Plásticas (Rollo)</td>
+                                <td>Empaquetado</td>
+                                <td>Unidad</td>
+                                <td class="stock-qty">15</td>
+                                <td class="stock-min">10</td>
+                                <td>75.00</td>
+                                <td class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Editar"><i class="fa-solid fa-pencil"></i></button>
+                                    <button class="btn-icon btn-delete" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </section>
+            
+            <footer class="app-footer">
+                <p>&copy; <span id="current-year"></span> Marketeros 360 | Be Clean Services v1.0</p>
+            </footer>
+        </main> 
+    </div> 
+
+    <div id="stock-modal" class="modal-overlay">
+        <div class="modal-content"> <header class="modal-header">
+                <h2 id="stock-modal-title">Nuevo Insumo</h2>
+                <button class="modal-close" id="stock-modal-close-btn">&times;</button>
+            </header>
+
+            <div class="modal-body">
+                <form id="stock-form">
+                    <div class="form-grid"> <div class="form-group">
+                            <label for="stock-codigo">Código</label>
+                            <input type="text" id="stock-codigo" name="codigo" placeholder="Ej: J-001">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stock-articulo">Artículo (Nombre) *</label>
+                            <input type="text" id="stock-articulo" name="articulo" required>
+                        </div>
+                        
+                        <div class="form-group form-span-col-2">
+                            <label for="stock-descripcion">Descripción</label>
+                            <textarea id="stock-descripcion" name="descripcion" rows="2" placeholder="Ej: Jabón para ropa delicada, galón de 5L"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stock-grupo">Grupo *</label>
+                            <select id="stock-grupo" name="grupo" required>
+                                <option value="">Seleccione grupo...</option>
+                                <option value="Quimicos">Químicos (Jabón, Suavizante)</option>
+                                <option value="Empaquetado">Empaquetado (Bolsas, Perchas)</option>
+                                <option value="Oficina">Oficina</option>
+                                <option value="Otros">Otros</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stock-unidad">Unidad de Medida *</label>
+                            <select id="stock-unidad" name="unidad" required>
+                                <option value="">Seleccione unidad...</option>
+                                <option value="Unidad">Unidad (ud)</option>
+                                <option value="Libra">Libra (lb)</option>
+                                <option value="Galon">Galón (gal)</option>
+                                <option value="Botella">Botella</option>
+                                <option value="Caja">Caja</option>
+                                <option value="Rollo">Rollo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stock-cantidad">Cantidad Actual *</all>
+                            <input type="number" id="stock-cantidad" name="cantidad" placeholder="0" min="0" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stock-minimo">Stock Mínimo *</label>
+                            <input type="number" id="stock-minimo" name="stock_minimo" placeholder="0" min="0" required>
+                            <small class="form-hint">Para la alerta de "Stock Bajo"</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stock-costo">Precio de Costo (Q) *</all>
+                            <input type="number" id="stock-costo" name="precio_costo" placeholder="0.00" step="0.01" min="0" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stock-proveedor">Proveedor (Opcional)</label>
+                            <input type="text" id="stock-proveedor" name="proveedor" placeholder="Nombre del proveedor">
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <footer class="modal-footer">
+                <button class="btn btn-secondary" id="stock-modal-cancel-btn">Cancelar</button>
+                <button class="btn btn-primary" id="stock-modal-save-btn">Guardar Insumo</button>
+            </footer>
+
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
