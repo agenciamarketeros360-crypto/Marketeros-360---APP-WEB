@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Dueño — Be Clean Services</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/main.js"></script>
+</head>
+
+<body class="role-owner">
+  <!-- ====== Menú lateral ====== -->
+  <aside class="sidebar">
+    <div class="logo-area">
+      <img src="img/logo_principal.png" alt="Be Clean">
+    </div>
+    <ul class="menu">
+      <li><a href="dashboard_admin.html" class="active"><i class="fa-solid fa-gauge"></i> Dashboard Dueño</a></li>
+      <li><a href="dashboard.html"><i class="fa-solid fa-user-check"></i> Dashboard Empleado</a></li>
+      <li><a href="servicios.html"><i class="fa-solid fa-basket-shopping"></i> Servicios</a></li>
+      <li><a href="clientes.html"><i class="fa-solid fa-users"></i> Clientes</a></li>
+      <li><a href="facturacion.html"><i class="fa-solid fa-file-invoice-dollar"></i> Facturación</a></li>
+      <li><a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> Stock</a></li>
+      <li><a href="rrhh.html"><i class="fa-solid fa-user-tie"></i> RRHH</a></li>
+      <li><a href="reportes.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+      <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+    </ul>
+  </aside>
+
+  <!-- ====== Contenido principal ====== -->
+  <main class="main-content">
+    <header class="header">
+      <div class="inner">
+        <div class="brand">
+          <i class="fa-solid fa-chart-line" style="color:var(--brand)"></i>
+          <div class="title">Panel del Dueño</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+
+      <!-- ===== KPIs PRINCIPALES ===== -->
+      <div class="grid cols-4 section owner-kpi-row">
+        <div class="card owner-kpi">
+          <span class="label">Ingresos del mes</span>
+          <strong id="own-ingresos">Q 0.00 · US$ 0.00</strong>
+          <small id="own-ingresos-var">vs mes anterior: +0%</small>
+        </div>
+        <div class="card owner-kpi">
+          <span class="label">Gastos totales</span>
+          <strong id="own-gastos">Q 0.00 · US$ 0.00</strong>
+          <small id="own-gastos-var">Controlado</small>
+        </div>
+        <div class="card owner-kpi">
+          <span class="label">Rentabilidad neta</span>
+          <strong id="own-rentabilidad">0%</strong>
+          <small>Meta sugerida: &gt; 25%</small>
+        </div>
+        <div class="card owner-kpi">
+          <span class="label">Caja actual</span>
+          <strong id="own-caja">Q 0.00 · US$ 0.00</strong>
+          <small id="own-caja-alerta">Dentro del rango</small>
+        </div>
+      </div>
+
+      <!-- ===== GRÁFICOS (PLACEHOLDERS) ===== -->
+      <div class="grid cols-2 section">
+        <div class="card">
+          <div class="card-header-inline">
+            <h2>Ventas del mes</h2>
+            <span class="tag tag-soft">Simulado</span>
+          </div>
+          <div id="chart-ventas" class="chart-placeholder">
+            [Gráfico de ventas por día — maqueta]
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-inline">
+            <h2>Flujo de caja</h2>
+            <span class="tag tag-soft">Simulado</span>
+          </div>
+          <div id="chart-caja" class="chart-placeholder">
+            [Gráfico de entradas / egresos — maqueta]
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RANKINGS ===== -->
+      <div class="grid cols-3 section">
+        <div class="card">
+          <div class="card-header-inline">
+            <h2>Top servicios</h2>
+          </div>
+          <table class="table table-min">
+            <thead>
+              <tr><th>Servicio</th><th>Órdenes</th><th>Ingresos</th></tr>
+            </thead>
+            <tbody id="own-top-servicios"></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-header-inline">
+            <h2>Top clientes</h2>
+          </div>
+          <table class="table table-min">
+            <thead>
+              <tr><th>Cliente</th><th>Órdenes</th><th>Ingresos</th></tr>
+            </thead>
+            <tbody id="own-top-clientes"></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-header-inline">
+            <h2>Desempeño del equipo</h2>
+          </div>
+          <table class="table table-min">
+            <thead>
+              <tr><th>Empleado</th><th>Órdenes</th><th>Retrasos</th></tr>
+            </thead>
+            <tbody id="own-equipo"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== STOCK & ALERTAS ===== -->
+      <div class="grid cols-2 section">
+        <div class="card">
+          <div class="card-header-inline">
+            <h2>Stock crítico</h2>
+            <a href="stock.html" class="tag tag-link">Ver stock</a>
+          </div>
+          <ul id="own-stock" class="owner-list"></ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header-inline">
+            <h2>Alertas de gestión</h2>
+          </div>
+          <ul id="own-alertas" class="owner-list"></ul>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>

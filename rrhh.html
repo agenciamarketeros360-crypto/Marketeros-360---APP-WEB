@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRHH – Be Clean Services</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script defer src="js/main.js"></script>
+</head>
+
+<body>
+<div class="app-container">
+
+    <!-- ====================== SIDEBAR ====================== -->
+    <aside class="sidebar">
+        <div class="logo-area">
+            <img src="img/logo_principal.png" class="logo" alt="logo">
+        </div>
+        <ul class="menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+            <li><a href="clientes.html"><i class="fa-solid fa-users"></i> Clientes</a></li>
+            <li><a href="servicios.html"><i class="fa-solid fa-shirt"></i> Servicios</a></li>
+            <li><a href="facturacion.html"><i class="fa-solid fa-file-invoice-dollar"></i> Facturación</a></li>
+            <li><a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> Stock</a></li>
+            <li><a href="fondos.html"><i class="fa-solid fa-wallet"></i> Fondos</a></li>
+            <li><a href="reportes.html"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+            <li><a href="rrhh.html" class="active"><i class="fa-solid fa-user-tie"></i> RRHH</a></li>
+            <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+    </aside>
+
+
+    <!-- ====================== CONTENIDO ====================== -->
+    <main class="main-content">
+        <header class="header">
+            <h1>Recursos Humanos</h1>
+        </header>
+
+        <div class="container">
+
+            <!-- ====================== TABS ====================== -->
+            <div id="tabsRRHH" class="tabs">
+                <button class="tab-btn btn-primary" data-tab="tab-empleados">Empleados</button>
+                <button class="tab-btn" data-tab="tab-asistencia">Asistencia</button>
+                <button class="tab-btn" data-tab="tab-planilla">Planilla</button>
+            </div>
+
+
+            <!-- =====================================================
+                 TAB 1 — EMPLEADOS
+            ====================================================== -->
+            <section id="tab-empleados" class="tab-pane" style="display: block;">
+
+                <div class="toolbar">
+                    <div class="left">
+                        <input type="text" class="input-search" placeholder="Buscar empleado...">
+                    </div>
+
+                    <div class="right">
+                        <button class="btn btn-primary" data-open="modalEmpleado">
+                            <i class="fa-solid fa-user-plus"></i> Nuevo empleado
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Foto</th>
+                                <th>Nombre</th>
+                                <th>Cargo</th>
+                                <th>Estado</th>
+                                <th>Salario (Q/USD)</th>
+                                <th>Ingreso</th>
+                                <th>Cumpleaños</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaRRHH"></tbody>
+                    </table>
+                </div>
+            </section>
+
+
+            <!-- =====================================================
+                 TAB 2 — ASISTENCIA
+            ====================================================== -->
+            <section id="tab-asistencia" class="tab-pane">
+                <div class="card">
+                    <h3>Registro diario de asistencia</h3>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Empleado</th>
+                                <th>Entrada</th>
+                                <th>Salida</th>
+                                <th>Horas totales</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaAsistencia">
+                            <tr><td colspan="4" class="muted">No hay datos aún</td></tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn btn-primary mt-10" id="marcarAsistencia">
+                        <i class="fa-solid fa-clock"></i> Registrar marca simulada
+                    </button>
+                </div>
+            </section>
+
+
+            <!-- =====================================================
+                 TAB 3 — PLANILLA
+            ====================================================== -->
+            <section id="tab-planilla" class="tab-pane">
+                <div class="card">
+                    <h3>Planilla del Mes</h3>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Empleado</th>
+                                <th>Salario base</th>
+                                <th>Bonificación</th>
+                                <th>IGSS</th>
+                                <th>Descuentos</th>
+                                <th>Total a pagar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaPlanilla">
+                            <tr><td colspan="6" class="muted">Calcular planilla para ver resultados</td></tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn btn-primary mt-10" id="btnCalcularPlanilla">
+                        <i class="fa-solid fa-calculator"></i> Calcular Planilla
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+
+<!-- ==========================================================
+     MODAL NUEVO EMPLEADO — COMPLETO
+========================================================== -->
+<div class="modal" id="modalEmpleado">
+    <div class="dialog">
+        <div class="head">
+            <strong><i class="fa-solid fa-user-plus"></i> Nuevo Empleado</strong>
+            <button class="btn-icon" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="body">
+            <form id="formEmpleado" class="grid cols-2 gap">
+
+                <h4 class="col-span-2">Información Personal</h4>
+
+                <div>
+                    <label>Nombre completo *</label>
+                    <input type="text" id="empNombre" required>
+                </div>
+
+                <div>
+                    <label>DPI / Pasaporte</label>
+                    <input type="text" id="empDocumento">
+                </div>
+
+                <div>
+                    <label>Fecha de nacimiento</label>
+                    <input type="date" id="empCumple">
+                </div>
+
+                <div>
+                    <label>Teléfono</label>
+                    <input type="text" id="empTelefono">
+                </div>
+
+                <div class="col-span-2">
+                    <label>Dirección</label>
+                    <input type="text" id="empDireccion">
+                </div>
+
+
+                <h4 class="col-span-2">Información Laboral</h4>
+
+                <div>
+                    <label>Cargo *</label>
+                    <input type="text" id="empCargo" required>
+                </div>
+
+                <div>
+                    <label>Área</label>
+                    <select id="empArea">
+                        <option value="Producción">Producción</option>
+                        <option value="Administración">Administración</option>
+                        <option value="Delivery">Delivery</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Fecha de ingreso *</label>
+                    <input type="date" id="empIngreso" required>
+                </div>
+
+                <div>
+                    <label>Estado</label>
+                    <select id="empEstado">
+                        <option value="Activo">Activo</option>
+                        <option value="Licencia">Licencia</option>
+                        <option value="Suspendido">Suspendido</option>
+                    </select>
+                </div>
+
+
+                <h4 class="col-span-2">Salario y Horario</h4>
+
+                <div>
+                    <label>Salario base (Q)*</label>
+                    <input type="number" id="empSalario" min="0" step="0.01" required>
+                </div>
+
+                <div>
+                    <label>Horario</label>
+                    <select id="empHorario">
+                        <option value="Tiempo completo">Tiempo completo</option>
+                        <option value="Medio tiempo">Medio tiempo</option>
+                        <option value="Rotativo">Turno rotativo</option>
+                    </select>
+                </div>
+
+
+                <h4 class="col-span-2">Contacto de emergencia</h4>
+
+                <div>
+                    <label>Nombre contacto</label>
+                    <input type="text" id="empEmergNombre">
+                </div>
+
+                <div>
+                    <label>Teléfono contacto</label>
+                    <input type="text" id="empEmergTelefono">
+                </div>
+
+                <h4 class="col-span-2">Foto de empleado</h4>
+
+                <div class="col-span-2">
+                    <input type="file" id="empFoto" accept="image/*">
+                </div>
+            </form>
+        </div>
+
+        <div class="foot">
+            <button class="btn btn-outline" data-close>Cancelar</button>
+            <button class="btn btn-primary" id="guardarEmpleado">
+                <i class="fa-solid fa-save"></i> Guardar empleado
+            </button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

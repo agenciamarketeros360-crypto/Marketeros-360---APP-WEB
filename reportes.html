@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reportes — Be Clean Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/main.js"></script>
+</head>
+
+<body class="role-owner">
+  <!-- ====== Menú lateral ====== -->
+  <aside class="sidebar">
+    <div class="logo-area">
+      <img src="img/logo_principal.png" alt="Be Clean">
+    </div>
+    <ul class="menu">
+      <li><a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+      <li><a href="clientes.html"><i class="fa-solid fa-users"></i> Clientes</a></li>
+      <li><a href="servicios.html"><i class="fa-solid fa-basket-shopping"></i> Servicios</a></li>
+      <li><a href="facturacion.html"><i class="fa-solid fa-file-invoice-dollar"></i> Facturación</a></li>
+      <li><a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> Stock</a></li>
+      <li class="only-owner"><a href="rrhh.html"><i class="fa-solid fa-user-tie"></i> RRHH</a></li>
+      <li><a href="reportes.html" class="active"><i class="fa-solid fa-chart-line"></i> Reportes</a></li>
+      <li><a href="fondos.html"><i class="fa-solid fa-wallet"></i> Fondos</a></li>
+      <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+    </ul>
+  </aside>
+
+  <!-- ====== Contenido principal ====== -->
+  <main class="main-content">
+    <header class="header">
+      <div class="inner">
+        <div class="brand">
+          <i class="fa-solid fa-soap" style="color:var(--brand)"></i>
+          <div class="title">Be Clean Services</div>
+        </div>
+        <div class="role-toggle">
+          <span id="roleBadge">Rol: Dueño</span>
+          <select id="roleSelect">
+            <option value="owner">Ver como: Dueño</option>
+            <option value="employee">Ver como: Empleado</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+
+      <!-- ===== Filtros ===== -->
+      <div class="card section" style="margin-bottom:20px;">
+        <div class="grid cols-4" style="align-items:center;gap:10px;">
+          <div>
+            <label>Desde</label>
+            <input type="date" style="width:100%;padding:.6rem .9rem;border:1px solid #ccc;border-radius:10px">
+          </div>
+          <div>
+            <label>Hasta</label>
+            <input type="date" style="width:100%;padding:.6rem .9rem;border:1px solid #ccc;border-radius:10px">
+          </div>
+          <div>
+            <label>Tipo de reporte</label>
+            <select style="width:100%;padding:.6rem .9rem;border:1px solid #ccc;border-radius:10px">
+              <option>Financiero</option>
+              <option>Flujo de Caja</option>
+              <option>Stock</option>
+              <option>RRHH</option>
+            </select>
+          </div>
+          <div style="text-align:right;">
+            <button class="btn btn-outline"><i class="fa-solid fa-filter"></i> Aplicar filtro</button>
+            <button class="btn btn-primary"><i class="fa-solid fa-file-export"></i> Exportar PDF</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Indicadores principales ===== -->
+      <div class="grid cols-3 section">
+        <div class="card p-4" style="padding:16px"><h3>💰 Ingresos totales</h3><strong id="repIngresos">Q 22,500 · US$ 2,903.23</strong></div>
+        <div class="card p-4" style="padding:16px"><h3>💸 Gastos totales</h3><strong id="repGastos">Q 12,050 · US$ 1,554.84</strong></div>
+        <div class="card p-4" style="padding:16px"><h3>📈 Resultado neto</h3><strong id="repResultado">Q 10,450 · US$ 1,348.39</strong></div>
+      </div>
+      <div class="grid cols-3 section">
+        <div class="card p-4" style="padding:16px"><h3>⚙️ Margen contribución</h3><strong id="repMargen">46%</strong></div>
+        <div class="card p-4" style="padding:16px"><h3>📊 Punto de equilibrio</h3><strong id="repEquilibrio">Q 10,850 · US$ 1,400.00</strong></div>
+        <div class="card p-4" style="padding:16px"><h3>🏦 Saldo de caja</h3><strong id="repCaja">Q 14,500 · US$ 1,870.97</strong></div>
+      </div>
+
+      <!-- ===== Pestañas ===== -->
+      <div class="grid cols-4" id="tabsReportes" style="gap:8px;margin-bottom:12px">
+        <button class="btn btn-outline tab-btn active" data-tab="tab-financiero"><i class="fa-solid fa-coins"></i> Financiero</button>
+        <button class="btn btn-outline tab-btn" data-tab="tab-flujo"><i class="fa-solid fa-water"></i> Flujo de caja</button>
+        <button class="btn btn-outline tab-btn" data-tab="tab-stock"><i class="fa-solid fa-boxes-stacked"></i> Stock</button>
+        <button class="btn btn-outline tab-btn" data-tab="tab-rrhh"><i class="fa-solid fa-user-tie"></i> RRHH</button>
+      </div>
+
+      <!-- ===== FINANCIERO ===== -->
+      <div id="tab-financiero" class="tab-pane">
+        <div class="card section">
+          <h2>Estado de Resultados</h2>
+          <table class="table">
+            <thead><tr><th>Concepto</th><th>Monto (Q)</th><th>Monto (US$)</th></tr></thead>
+            <tbody>
+              <tr><td>Ingresos</td><td>Q 22,500.00</td><td>US$ 2,903.23</td></tr>
+              <tr><td>Costos variables</td><td>Q 6,800.00</td><td>US$ 877.42</td></tr>
+              <tr><td>Costos fijos</td><td>Q 5,250.00</td><td>US$ 677.42</td></tr>
+              <tr class="total"><td><strong>Resultado neto</strong></td><td><strong>Q 10,450.00</strong></td><td><strong>US$ 1,348.39</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card section">
+          <h2>Ingresos vs Gastos (Gráfico mensual)</h2>
+          <div class="chart-placeholder" style="height:240px;background:#f8f8f8;border-radius:10px;text-align:center;line-height:240px;color:#888;">
+            [ 📊 Gráfico de barras aquí ]
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== FLUJO DE CAJA ===== -->
+      <div id="tab-flujo" class="tab-pane" style="display:none">
+        <div class="card section">
+          <h2>Flujo de Caja Mensual</h2>
+          <table class="table">
+            <thead><tr><th>Mes</th><th>Entradas (Q/USD)</th><th>Salidas (Q/USD)</th><th>Saldo</th></tr></thead>
+            <tbody>
+              <tr><td>Octubre</td><td>Q 19,800 / US$ 2,554.84</td><td>Q 10,450 / US$ 1,348.39</td><td>Q 9,350 / US$ 1,206.45</td></tr>
+              <tr><td>Noviembre</td><td>Q 22,500 / US$ 2,903.23</td><td>Q 12,050 / US$ 1,554.84</td><td>Q 10,450 / US$ 1,348.39</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card section">
+          <h2>Gráfico de Flujo</h2>
+          <div class="chart-placeholder" style="height:240px;background:#f8f8f8;border-radius:10px;text-align:center;line-height:240px;color:#888;">
+            [ 📈 Gráfico de línea aquí ]
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STOCK ===== -->
+      <div id="tab-stock" class="tab-pane" style="display:none">
+        <div class="card section">
+          <h2>Valor de Inventario</h2>
+          <table class="table">
+            <thead><tr><th>Producto</th><th>Stock</th><th>Valor (Q)</th><th>Valor (US$)</th></tr></thead>
+            <tbody>
+              <tr><td>Detergente líquido</td><td>25</td><td>Q 875.00</td><td>US$ 112.90</td></tr>
+              <tr><td>Suavizante premium</td><td>8</td><td>Q 224.00</td><td>US$ 28.90</td></tr>
+              <tr><td>Bolsas plásticas</td><td>0</td><td>Q 0.00</td><td>US$ 0.00</td></tr>
+              <tr class="total"><td><strong>Total</strong></td><td></td><td><strong>Q 1,099.00</strong></td><td><strong>US$ 141.80</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card section">
+          <h2>Distribución de gastos por tipo</h2>
+          <div class="chart-placeholder" style="height:240px;background:#f8f8f8;border-radius:10px;text-align:center;line-height:240px;color:#888;">
+            [ 🥧 Gráfico circular aquí ]
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RRHH ===== -->
+      <div id="tab-rrhh" class="tab-pane" style="display:none">
+        <div class="card section">
+          <h2>Costos de Personal</h2>
+          <table class="table">
+            <thead><tr><th>Empleado</th><th>Cargo</th><th>Sueldo (Q/USD)</th><th>Bonos</th></tr></thead>
+            <tbody>
+              <tr><td>Ana López</td><td>Encargada</td><td>Q 3,500 / US$ 451.61</td><td>Q 200</td></tr>
+              <tr><td>Luis Pérez</td><td>Asistente</td><td>Q 2,800 / US$ 361.29</td><td>Q 150</td></tr>
+              <tr class="total"><td><strong>Total</strong></td><td></td><td><strong>Q 6,300 / US$ 812.90</strong></td><td>Q 350</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card section">
+          <h2>Gráfico de Costos RRHH</h2>
+          <div class="chart-placeholder" style="height:240px;background:#f8f8f8;border-radius:10px;text-align:center;line-height:240px;color:#888;">
+            [ 👥 Gráfico de barras RRHH aquí ]
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
